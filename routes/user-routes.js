@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const router = express.Router();
 const jwt = "jsonwebtoken";
 const bcrypt = require("bcryptjs");
@@ -31,7 +32,28 @@ router.post("/", async (req, res) => {
       password
     });
 
+    // create salt for hashing - 10 rounds
+    const salt = await bcrypt.genSalt(10);
+    // assign password as now hashed password
+    user.password = await bcrypt.hash(password, salt);
+
     await user.save();
+
+    const payload = {
+      user: {
+        id: user.id
+      }
+    };
+
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      { expiresIn: 36000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
 
     res.json("user saved");
   } catch (err) {
