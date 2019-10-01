@@ -1,0 +1,14 @@
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.nav-right {
+  position: absolute;
+  right: 15px;
+}
+
+.brewery-search-landing {
+  margin-top: 25px;
+}
