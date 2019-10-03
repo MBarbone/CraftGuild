@@ -6,11 +6,16 @@ import { connect } from "react-redux";
 import {
   nameSearch,
   stateSearch,
-  typeSearch
+  typeSearch,
+  nameSearchSubmit
 } from "../../actions/search-actions";
 import "./style.css";
 
 class Hero extends React.Component {
+  state = {
+    query: ""
+  };
+
   onNameSearchSelect = () => {
     this.props.onNameSearchSelect();
     console.log(this.props);
@@ -26,12 +31,31 @@ class Hero extends React.Component {
     document.getElementById("stateSearchTab").classList.toggle("active");
   };
 
+  handleChange = e => {
+    this.setState({ query: e.target.value });
+    console.log(this.state.query);
+  };
+
+  handleSubmit = (e, query) => {
+    e.preventDefault();
+    if (query === "") return;
+    console.log("clicked");
+
+    // history.push(`/search=${query}`);
+  };
+
   render() {
     let condRender = null;
     let condRender2 = null;
 
     if (this.props.showNameSearch) {
-      condRender = <NameSearch />;
+      condRender = (
+        <NameSearch
+          query={this.query}
+          handleChange={this.handleChange}
+          handleSubmit={e => this.handleSubmit(e, this.state.query)}
+        />
+      );
     } else if (this.props.showStateSearch) {
       condRender = <StateSearch />;
     } else if (this.props.showTypeSearch) {
@@ -78,13 +102,15 @@ class Hero extends React.Component {
 const mapStateToProps = state => ({
   showNameSearch: state.search.showNameSearch,
   showStateSearch: state.search.showStateSearch,
-  showTypeSearch: state.search.showTypeSearch
+  showTypeSearch: state.search.showTypeSearch,
+  results: []
 });
 
 const mapActionsToProps = {
   onNameSearchSelect: nameSearch,
   onStateSearchSelect: stateSearch,
-  onTypeSearchSelect: typeSearch
+  onTypeSearchSelect: typeSearch,
+  onNameSearchSubmit: nameSearchSubmit
 };
 
 export default connect(

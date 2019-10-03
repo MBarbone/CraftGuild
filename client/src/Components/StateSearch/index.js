@@ -85,7 +85,7 @@ class StateSearch extends React.Component {
         {typeSearchComponent}
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-blue-grey lighten-5"
           onClick={this.onTypeSearchSelect}
         >
           {buttonText}

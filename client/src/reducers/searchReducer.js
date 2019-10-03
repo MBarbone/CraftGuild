@@ -1,13 +1,17 @@
 import {
   STATE_SEARCH,
   NAME_SEARCH,
-  TOGGLE_TYPE_SEARCH
+  TOGGLE_TYPE_SEARCH,
+  NAME_SEARCH_SUBMIT
+  // STATE_SEARCH_SUBMIT,
+  // TYPE_SEARCH_SUBMIT
 } from "../actions/types";
 
 const initialState = {
   showNameSearch: true,
   showStateSearch: false,
-  showTypeSearch: false
+  showTypeSearch: false,
+  results: []
 };
 
 export default (state = initialState, action) => {
@@ -34,6 +38,12 @@ export default (state = initialState, action) => {
         showNameSearch: false,
         showStateSearch: true,
         showTypeSearch: !state.showTypeSearch
+      };
+
+    case NAME_SEARCH_SUBMIT:
+      return {
+        ...state,
+        results: action.payload
       };
 
     default:
