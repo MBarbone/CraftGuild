@@ -21,12 +21,23 @@ class Hero extends React.Component {
     console.log(this.props);
   };
 
-  onTypeSearchSelect = () => {
-    this.props.onTypeSearchSelect();
-    console.log(this.props);
+  activeStyle = () => {
+    document.getElementById("nameSearchTab").classList.toggle("active");
+    document.getElementById("stateSearchTab").classList.toggle("active");
   };
 
   render() {
+    let condRender = null;
+    let condRender2 = null;
+
+    if (this.props.showNameSearch) {
+      condRender = <NameSearch />;
+    } else if (this.props.showStateSearch) {
+      condRender = <StateSearch />;
+    } else if (this.props.showTypeSearch) {
+      condRender2 = <TypeSearch />;
+    }
+
     return (
       <div>
         <section className="hero">
@@ -36,13 +47,27 @@ class Hero extends React.Component {
             <br></br>
             <h4>Search By:</h4>
             <ul className="nav nav-tabs">
-              <li className="nav-item">
-                <div className="nav-link active">Brewery Name</div>
+              <li className="nav-item" onClick={this.onNameSearchSelect}>
+                <div
+                  className="nav-link active"
+                  id="nameSearchTab"
+                  onClick={this.activeStyle}
+                >
+                  Brewery Name
+                </div>
               </li>
               <li className="nav-item" onClick={this.onStateSearchSelect}>
-                <div className="nav-link">State</div>
+                <div
+                  className="nav-link"
+                  id="stateSearchTab"
+                  onClick={this.activeStyle}
+                >
+                  State
+                </div>
               </li>
             </ul>
+            {condRender}
+            {condRender2}
           </div>
         </section>
       </div>

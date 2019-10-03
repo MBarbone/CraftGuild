@@ -1,4 +1,4 @@
-import { STATE_SEARCH, NAME_SEARCH, TYPE_SEARCH } from "./types";
+import { STATE_SEARCH, NAME_SEARCH, TOGGLE_TYPE_SEARCH } from "./types";
 
 export const nameSearch = () => {
   return {
@@ -14,6 +14,6 @@ export const stateSearch = () => {
 
 export const typeSearch = () => {
   return {
-    type: TYPE_SEARCH
+    type: TOGGLE_TYPE_SEARCH
   };
 };

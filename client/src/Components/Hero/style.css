@@ -21,6 +21,11 @@
   background-attachment: fixed;
 }
 
+.hero-inner {
+  position: absolute;
+  top: 350px;
+}
+
 .hero h1 {
   /* Text styles */
   font-size: 5em;
@@ -28,4 +33,18 @@
   /* Margins */
   margin-top: 0;
   margin-bottom: 0.5em;
+}
+
+/* mobile friendly */
+
+@media screen and (max-height: 1000px) {
+  .hero-inner {
+    top: 250px;
+  }
+}
+
+@media screen and (max-height: 850px) {
+  .hero-inner {
+    top: 120px;
+  }
 }

@@ -8,7 +8,7 @@ class TypeSearch extends React.Component {
         style={{ height: "38px" }}
       >
         <select className="ui fluid dropdown">
-          <option value="">State</option>
+          <option value="">Type</option>
           <option value="micro">Micro</option>
           <option value="regional">Regional</option>
           <option value="brewpub">Brewpub</option>
@@ -18,13 +18,6 @@ class TypeSearch extends React.Component {
           <option value="contract">Contract</option>
           <option value="proprietor">Proprietor</option>
         </select>
-        <button
-          className="btn btn-md btn-outline-light m-0 px-3 py-2 z-depth-0 waves-effect"
-          type="button"
-          id="button-addon2"
-        >
-          Search
-        </button>
       </div>
     );
   }

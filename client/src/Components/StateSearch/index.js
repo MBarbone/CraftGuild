@@ -1,7 +1,22 @@
 import React from "react";
+import { connect } from "react-redux";
+import { typeSearch } from "../../actions/search-actions";
+import TypeSearch from "../TypeSearch/index";
 
 class StateSearch extends React.Component {
+  onTypeSearchSelect = () => {
+    this.props.onTypeSearchSelect();
+    console.log(this.props);
+  };
   render() {
+    let typeSearchComponent = null;
+    let buttonText = "";
+    if (this.props.showTypeSearch === false) {
+      buttonText = "Show Type Search";
+    } else {
+      buttonText = "Hide Type Search";
+      typeSearchComponent = <TypeSearch />;
+    }
     return (
       <div className="brewery-search-landing">
         <div className="input-group mb-3" style={{ height: "38px" }}>
@@ -67,19 +82,28 @@ class StateSearch extends React.Component {
             Search
           </button>
         </div>
-        <div className="custom-control custom-switch">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="customSwitches"
-          />
-          <label className="custom-control-label" htmlFor="customSwitches">
-            Add Brewery Type
-          </label>
-        </div>
+        {typeSearchComponent}
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={this.onTypeSearchSelect}
+        >
+          {buttonText}
+        </button>
       </div>
     );
   }
 }
 
-export default StateSearch;
+const mapStateToProps = state => ({
+  showTypeSearch: state.search.showTypeSearch
+});
+
+const mapActionsToProps = {
+  onTypeSearchSelect: typeSearch
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(StateSearch);

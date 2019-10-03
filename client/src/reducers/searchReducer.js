@@ -1,4 +1,8 @@
-import { STATE_SEARCH, NAME_SEARCH, TYPE_SEARCH } from "../actions/types";
+import {
+  STATE_SEARCH,
+  NAME_SEARCH,
+  TOGGLE_TYPE_SEARCH
+} from "../actions/types";
 
 const initialState = {
   showNameSearch: true,
@@ -24,12 +28,12 @@ export default (state = initialState, action) => {
         showTypeSearch: false
       };
 
-    case TYPE_SEARCH:
+    case TOGGLE_TYPE_SEARCH:
       return {
         ...state,
         showNameSearch: false,
         showStateSearch: true,
-        showTypeSearch: true
+        showTypeSearch: !state.showTypeSearch
       };
 
     default:
